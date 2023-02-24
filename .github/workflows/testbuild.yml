@@ -1,0 +1,33 @@
+name: Build test
+
+on:
+  workflow_dispatch:
+    
+  push:
+    branches:
+      - main
+      - develop
+      - feature-*
+      - release-v*
+      - hotfix-*
+      - bugfix-m-*
+      - bugfix-*
+      - feature/**
+      - release/v**
+      - hotfix/**
+      - bugfix-m/**
+      - bugfix/**
+    paths-ignore:
+      - '.gitignore'
+      - 'README.md'
+      - '.github'    
+
+jobs:
+  prepare:
+    name: Generate Artifact Name
+    uses: ./.github/workflows/artifacts.yml    
+
+  build:
+    needs: [prepare]
+    steps:
+      - uses: actions/checkout@main

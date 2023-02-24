@@ -1,0 +1,48 @@
+name: Generate artifactName
+on:
+  workflow_call:
+    outputs:
+      artifactName:
+        description: 'name of the artifact that will be generated'
+        value: ${{ jobs.prepare.outputs.artifactName }}
+      image_tag:
+        description: 'tag of the docker image with buildnumber'
+        value: ${{ jobs.prepare.outputs.image_tag }}
+      image_tag_r_version:
+        description: "special 'latest' tag if it is a release branch build "
+        value: ${{ jobs.prepare.outputs.image_tag_r_version }}
+      artifactType:
+        description: 'determines if it is a release branch build'
+        value: ${{ jobs.prepare.outputs.artifactType }}
+
+jobs:
+  prepare:
+    name: Check version and branchname before building
+    runs-on: ubuntu-latest
+    outputs:
+      artifactName: ${{ steps.artifactName.outputs.artifactName }}
+      image_tag: ${{ steps.artifactName.outputs.image_tag }}
+      image_tag_r_version: ${{ steps.artifactName.outputs.image_tag_r_version }}
+      artifactType: ${{ steps.artifactName.outputs.artifactType }}
+    steps:
+      # - name: Support longpaths
+      #   run: git config --system core.longpaths true
+      - uses: actions/checkout@v2
+      - name: Determine the artifacts type
+        id: artifactName
+        run: |
+          # Make sure the branch name matches the allowed branchnames.
+          # Allow branchnames are: 
+          # feature-d*   = d-feature    ### commits on a feature in develop
+          # feature-m*   = m-feature    ### commits on a feature in a main version
+          # feature-r*   = r-feature    ### commits on a feature in a release version
+          # develop     = d-current     ### merge from feature-* to develop
+          # bugfix-m*    = m-bugfix     ### commits on bugfix-m*
+          # bugfix-r*    = r-bugfix     ### commits on bugfix-r*
+          # bugfix-*    = d-bugfix     ### commits on bugfix-*
+          # main        = m-stable      ### merge from develop to main
+          # bugfix-m-*  = m-bugfix     ### commits on
+          # release-v*  = r-stable   ### merge from main or hotfix to release-v*
+          # hotfix-*    = r-hotfix    ### commits on hotfix-*
+
+          echo $env:GITHUB_REF    
