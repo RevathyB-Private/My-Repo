@@ -28,10 +28,5 @@ jobs:
     uses: ./.github/workflows/artifacts.yml    
 
   build:
-    runs-on: ubuntu-latest
-    needs: [prepare]
-    steps:
-      - uses: actions/checkout@v3
-      - name: build
-        id: local-action
-        uses: ./.github/workflows/artifacts.yml
+    needs: [prepare]   
+    uses: ./.github/workflows/artifacts.yml
