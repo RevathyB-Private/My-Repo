@@ -32,4 +32,6 @@ jobs:
     needs: [prepare]
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/artifacts.yml
+      - name: build
+        id: local-action
+        uses: ./.github/workflows/artifacts.yml
