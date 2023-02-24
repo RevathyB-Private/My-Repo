@@ -8,10 +8,10 @@ on:
         required: true
         default: 'World'
 
-  jobs:
-    greet:
-      name: Greet
-      runs-on: ubuntu-latest
-      steps:
-        - name: Send greeting
-          run: echo "Hello ${{ inputs.name }}"
+jobs:
+  greet:
+    name: Greet
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send greeting
+        run: echo "Hello ${{ inputs.name }}"
