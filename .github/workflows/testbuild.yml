@@ -25,6 +25,7 @@ on:
 jobs:
   prepare:
     name: Generate Artifact Name
+    runs-on: ubuntu-latest
     uses: ./.github/workflows/artifacts.yml    
 
   build:
