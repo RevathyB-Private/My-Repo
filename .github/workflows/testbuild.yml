@@ -24,11 +24,11 @@ on:
 
 jobs:
   prepare:
-    name: Generate Artifact Name
-    runs-on: ubuntu-latest
+    name: Generate Artifact Name    
     uses: ./.github/workflows/artifacts.yml    
 
   build:
+    runs-on: ubuntu-latest
     needs: [prepare]
     steps:
       - uses: actions/checkout@main
