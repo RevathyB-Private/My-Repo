@@ -30,3 +30,7 @@ jobs:
   build:
     needs: [prepare]   
     uses: ./.github/workflows/artifacts.yml
+    with:
+      product: 'test'
+    secrets: inherit
+    
