@@ -2,7 +2,7 @@ name: Build test
 
 on:
   workflow_dispatch:
-    
+  pull_request:  
   push:
     branches:
       - main
@@ -19,8 +19,8 @@ on:
       - bugfix/**
     paths-ignore:
       - '.gitignore'
-      - 'README.md'
-      - '.github'    
+      #- 'README.md'
+      #- '.github'    
 
 jobs:
   prepare:
