@@ -9,6 +9,7 @@ on:
         required: true
         default: 'World'
   pull_request:
+  push:
   
 jobs:
   greet:
